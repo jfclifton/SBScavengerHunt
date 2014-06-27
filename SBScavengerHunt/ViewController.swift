@@ -20,6 +20,11 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func onCreatePressed(sender: AnyObject) {
+        var createVC = CreateHuntViewController(nibName:"CreateHuntViewController", bundle:nil)
+        self.navigationController.pushViewController(createVC, animated: true)
+        
+    }
 
 }
 

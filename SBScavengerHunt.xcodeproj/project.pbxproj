@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		06D0B6F7694B4BDD9769CADF /* libPods-SBScavengerHunt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EA5825F15F44FE78AC25B05 /* libPods-SBScavengerHunt.a */; };
+		17767A8F195DAD6100DCC84B /* CreateHuntViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17767A8E195DAD6100DCC84B /* CreateHuntViewController.swift */; };
+		17767A91195DAD8600DCC84B /* CreateHuntViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17767A90195DAD8600DCC84B /* CreateHuntViewController.xib */; };
 		55EC791C195D9C35005308B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EC791B195D9C35005308B6 /* AppDelegate.swift */; };
 		55EC791F195D9C35005308B6 /* SBScavengerHunt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 55EC791D195D9C35005308B6 /* SBScavengerHunt.xcdatamodeld */; };
 		55EC7921195D9C35005308B6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EC7920195D9C35005308B6 /* ViewController.swift */; };
@@ -30,6 +32,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		17767A8E195DAD6100DCC84B /* CreateHuntViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateHuntViewController.swift; sourceTree = "<group>"; };
+		17767A90195DAD8600DCC84B /* CreateHuntViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateHuntViewController.xib; sourceTree = "<group>"; };
 		2EA5825F15F44FE78AC25B05 /* libPods-SBScavengerHunt.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SBScavengerHunt.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55EC7916195D9C35005308B6 /* SBScavengerHunt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SBScavengerHunt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55EC791A195D9C35005308B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -69,6 +73,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		17767A8C195DAD3D00DCC84B /* Create */ = {
+			isa = PBXGroup;
+			children = (
+				17767A8E195DAD6100DCC84B /* CreateHuntViewController.swift */,
+				17767A90195DAD8600DCC84B /* CreateHuntViewController.xib */,
+			);
+			name = Create;
+			sourceTree = "<group>";
+		};
+		17767A8D195DAD4A00DCC84B /* Find */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Find;
+			sourceTree = "<group>";
+		};
 		55EC790D195D9C35005308B6 = {
 			isa = PBXGroup;
 			children = (
@@ -92,6 +112,8 @@
 		55EC7918195D9C35005308B6 /* SBScavengerHunt */ = {
 			isa = PBXGroup;
 			children = (
+				17767A8D195DAD4A00DCC84B /* Find */,
+				17767A8C195DAD3D00DCC84B /* Create */,
 				55EC7945195DA8E4005308B6 /* Notes.txt */,
 				55EC791B195D9C35005308B6 /* AppDelegate.swift */,
 				55EC7920195D9C35005308B6 /* ViewController.swift */,
@@ -224,6 +246,7 @@
 				55EC7924195D9C35005308B6 /* Main.storyboard in Resources */,
 				55EC7946195DA8E4005308B6 /* Notes.txt in Resources */,
 				55EC7926195D9C35005308B6 /* Images.xcassets in Resources */,
+				17767A91195DAD8600DCC84B /* CreateHuntViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,6 +300,7 @@
 				55EC7921195D9C35005308B6 /* ViewController.swift in Sources */,
 				55EC791F195D9C35005308B6 /* SBScavengerHunt.xcdatamodeld in Sources */,
 				55EC791C195D9C35005308B6 /* AppDelegate.swift in Sources */,
+				17767A8F195DAD6100DCC84B /* CreateHuntViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
