@@ -21,7 +21,7 @@ class FindHuntViewController: UIViewController, MCNearbyServiceAdvertiserDelegat
     var beaconManager: ESTBeaconManager?
     
     var dictionary : NSDictionary?
-    var targets : NSDictionary?
+    var target : NSDictionary?
 
     @IBOutlet var huntDescLabel: UILabel
     
@@ -95,15 +95,20 @@ class FindHuntViewController: UIViewController, MCNearbyServiceAdvertiserDelegat
         var str = NSString(data: data, encoding: NSUTF8StringEncoding)
         println("received data: \(str)")
         dictionary = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? NSDictionary
-        targets = dictionary!["targets"][0] as? NSDictionary
+        var t = dictionary!["targets"] as NSArray
+        target = t[0] as? NSDictionary
+        huntDescLabel.text = target!["tooFar"] as String
         
         beaconManager = ESTBeaconManager()
         beaconManager!.delegate = self;
-        var uuid = NSUUID(UUIDString: targets!["proximityUUID"] as NSString)
-        var major = targets!["major"] as NSNumber
-        var minor = targets!["minor"] as NSNumber
-        var beaconRegion = ESTBeaconRegion(proximityUUID: uuid, major: CLBeaconMajorValue(major.intValue), minor: CLBeaconMajorValue(minor.intValue), identifier: "estimote")
-        beaconManager!.startRangingBeaconsInRegion(beaconRegion)    }
+        var uuid = NSUUID(UUIDString: target!["proximityUUID"] as String)
+        var major = target!["major"].intValue
+        var minor = target!["minor"].intValue
+        
+        var beaconRegion = ESTBeaconRegion(proximityUUID: uuid, major: CLBeaconMajorValue(major), minor: CLBeaconMinorValue(minor), identifier: "test")
+
+        beaconManager!.startRangingBeaconsInRegion(beaconRegion)
+    }
     
     // Received a byte stream from remote peer
     func session(session: MCSession!, didReceiveStream stream: NSInputStream!, withName streamName: String!, fromPeer peerID: MCPeerID!) {
@@ -127,7 +132,13 @@ class FindHuntViewController: UIViewController, MCNearbyServiceAdvertiserDelegat
             if beacons.count > 0 {
                 let beacon : ESTBeacon = beacons[0] as ESTBeacon
                 if beacon.proximity == CLProximity.Far {
-                    
+                    huntDescLabel.text = target!["far"] as String
+                } else if (beacon.proximity == CLProximity.Near) {
+                    huntDescLabel.text = target!["near"] as String
+                } else if (beacon.proximity == CLProximity.Immediate) {
+                    huntDescLabel.text = target!["immediate"] as String
+                } else {
+                    huntDescLabel.text = target!["tooFar"] as String
                 }
             }
     }
