@@ -16,6 +16,9 @@ class CreateHuntViewController : UIViewController, MCNearbyServiceAdvertiserDele
     var localPeerID = MCPeerID(displayName:UIDevice.currentDevice().name)
     var advertiser : MCNearbyServiceAdvertiser = MCNearbyServiceAdvertiser()
     
+    var invitationHandler : ((Bool, MCSession!) -> Void)?
+    var session : MCSession?
+    
     init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
         // Custom init
         super.init(nibName:nibName, bundle:nibBundle)
@@ -32,14 +35,18 @@ class CreateHuntViewController : UIViewController, MCNearbyServiceAdvertiserDele
     
     func advertiser(advertiser: MCNearbyServiceAdvertiser!, didReceiveInvitationFromPeer peerID: MCPeerID!, withContext context: NSData!, invitationHandler: ((Bool, MCSession!) -> Void)!)
     {
+        
         var actionSheet = UIActionSheet()
         actionSheet.delegate = self
         actionSheet.title = "Received Invitation from \(peerID.displayName)"
         actionSheet.addButtonWithTitle("Reject")
-        actionSheet.addButtonWithTitle("Block")
         actionSheet.addButtonWithTitle("Accept")
         actionSheet.cancelButtonIndex = 0;
         actionSheet.showInView(self.view)
+        
+        session = MCSession(peer:peerID)
+        
+        self.invitationHandler = invitationHandler
     
     }
     
@@ -49,13 +56,22 @@ class CreateHuntViewController : UIViewController, MCNearbyServiceAdvertiserDele
         switch buttonIndex {
         case 0:
             println("Rejected")
-    
+            if let ivh = invitationHandler
+            {
+                ivh(false, session)
+            }
         case 1:
             println("Blocked")
-        
+            if let ivh = invitationHandler
+            {
+                ivh(false, session)
+            }
         case 2:
             println("Accepted")
-            
+            if let ivh = invitationHandler
+            {
+                ivh(true, session)
+            }
         default:
             println("nothing")
         }
