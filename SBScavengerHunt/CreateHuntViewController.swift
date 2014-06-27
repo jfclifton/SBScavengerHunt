@@ -27,6 +27,7 @@ class CreateHuntViewController : UIViewController, MCNearbyServiceBrowserDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        broadcast()
     }
     
     func broadcast() {

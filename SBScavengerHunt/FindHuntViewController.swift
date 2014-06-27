@@ -80,7 +80,9 @@ class FindHuntViewController: UIViewController, MCNearbyServiceAdvertiserDelegat
         }
     }
     
-    func session(session: MCSession!, peer peerID: MCPeerID!, didChangeState state: MCSessionState) { }
+    func session(session: MCSession!, peer peerID: MCPeerID!, didChangeState state: MCSessionState) {
+        println("peer changed state: \(state)")
+    }
     
     // Received data from remote peer
     func session(session: MCSession!, didReceiveData data: NSData!, fromPeer peerID: MCPeerID!) {
@@ -90,16 +92,16 @@ class FindHuntViewController: UIViewController, MCNearbyServiceAdvertiserDelegat
     
     // Received a byte stream from remote peer
     func session(session: MCSession!, didReceiveStream stream: NSInputStream!, withName streamName: String!, fromPeer peerID: MCPeerID!) {
-        
+        println("session stream")
     }
     
     // Start receiving a resource from remote peer
     func session(session: MCSession!, didStartReceivingResourceWithName resourceName: String!, fromPeer peerID: MCPeerID!, withProgress progress: NSProgress!) {
-        
+        println("session resource")
     }
     
     // Finished receiving a resource from remote peer and saved the content in a temporary location - the app is responsible for moving the file to a permanent location within its sandbox
     func session(session: MCSession!, didFinishReceivingResourceWithName resourceName: String!, fromPeer peerID: MCPeerID!, atURL localURL: NSURL!, withError error: NSError!) {
-        
+        println("session resource finished")        
     }
 }
