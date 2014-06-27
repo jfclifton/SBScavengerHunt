@@ -51,6 +51,8 @@ UITableViewDelegate, UITableViewDataSource {
     }
     
     @IBAction func doneButtonPressed(sender : AnyObject) {
+        hunt!.title = self.titleTextField.text
+        hunt!.huntDescription = self.descriptionTextField.text
         let broadcastVC = CreateHuntViewController(nibName: "CreateHuntViewController", bundle: nil)
         broadcastVC.hunt = hunt
         self.navigationController.pushViewController(broadcastVC, animated: true)
