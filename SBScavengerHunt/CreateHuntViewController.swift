@@ -50,10 +50,16 @@ class CreateHuntViewController : UIViewController, MCNearbyServiceBrowserDelegat
     
     func session(session: MCSession!, peer peerID: MCPeerID!, didChangeState state: MCSessionState) {
         if state == MCSessionState.NotConnected {
-            session.connectPeer(peerID, withNearbyConnectionData: nil)
+            session.nearbyConnectionDataForPeer(peerID, withCompletionHandler: {(data: NSData!, error: NSError!) in
+                session.connectPeer(peerID, withNearbyConnectionData: data)
+                })
         } else if state == MCSessionState.Connected {
             session.sendData(hunt!.jsonData(), toPeers: [peerID], withMode: MCSessionSendDataMode.Reliable, error: nil)
         }
+    }
+    
+    func completion(data: NSData, err: NSError) {
+        
     }
     
     // Received data from remote peer
