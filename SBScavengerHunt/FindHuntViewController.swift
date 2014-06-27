@@ -25,7 +25,7 @@ class FindHuntViewController: UIViewController, MCNearbyServiceAdvertiserDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        theSession = MCSession(peer: MCPeerID(displayName: UIDevice.currentDevice().name))
+        theSession = MCSession(peer: localPeerID)
         theSession!.delegate = self
         
         advertiser = MCNearbyServiceAdvertiser(peer:localPeerID, discoveryInfo:nil, serviceType:"SB-Hunt")
@@ -44,11 +44,12 @@ class FindHuntViewController: UIViewController, MCNearbyServiceAdvertiserDelegat
         var actionSheet = UIActionSheet()
         actionSheet.delegate = self
         actionSheet.title = "Received Invitation from \(peerID.displayName)"
-        actionSheet.addButtonWithTitle("Reject")
         actionSheet.addButtonWithTitle("Accept")
-        actionSheet.cancelButtonIndex = 0;
+        actionSheet.addButtonWithTitle("Reject")
+        actionSheet.destructiveButtonIndex = 1;
         actionSheet.showInView(self.view)
         
+//        invitationHandler(true, theSession)
         self.invitationHandler = invitationHandler
     
     }
@@ -58,16 +59,16 @@ class FindHuntViewController: UIViewController, MCNearbyServiceAdvertiserDelegat
     {
         switch buttonIndex {
         case 0:
-            println("Rejected")
-            if let ivh = invitationHandler
-            {
-                ivh(false, theSession)
-            }
-        case 1:
             println("Accepted")
             if let ivh = invitationHandler
             {
                 ivh(true, theSession)
+            }
+        case 1:
+            println("Rejected")
+            if let ivh = invitationHandler
+            {
+                ivh(false, theSession)
             }
         default:
             println("nothing")
