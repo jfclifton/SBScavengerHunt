@@ -16,6 +16,7 @@
 		55EC7932195D9C35005308B6 /* SBScavengerHuntTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EC7931195D9C35005308B6 /* SBScavengerHuntTests.swift */; };
 		55EC7940195D9DA0005308B6 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55EC793F195D9DA0005308B6 /* CoreBluetooth.framework */; };
 		55EC7942195D9DA6005308B6 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55EC7941195D9DA6005308B6 /* CoreLocation.framework */; };
+		55EC7946195DA8E4005308B6 /* Notes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 55EC7945195DA8E4005308B6 /* Notes.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,7 @@
 		55EC793B195D9D21005308B6 /* SBScavengerHunt-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SBScavengerHunt-Bridging-Header.h"; sourceTree = "<group>"; };
 		55EC793F195D9DA0005308B6 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		55EC7941195D9DA6005308B6 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		55EC7945195DA8E4005308B6 /* Notes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Notes.txt; sourceTree = "<group>"; };
 		90C6D519B3BE4DA2AFA43070 /* Pods-SBScavengerHunt.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SBScavengerHunt.xcconfig"; path = "Pods/Pods-SBScavengerHunt.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -90,6 +92,7 @@
 		55EC7918195D9C35005308B6 /* SBScavengerHunt */ = {
 			isa = PBXGroup;
 			children = (
+				55EC7945195DA8E4005308B6 /* Notes.txt */,
 				55EC791B195D9C35005308B6 /* AppDelegate.swift */,
 				55EC7920195D9C35005308B6 /* ViewController.swift */,
 				55EC7922195D9C35005308B6 /* Main.storyboard */,
@@ -219,6 +222,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				55EC7924195D9C35005308B6 /* Main.storyboard in Resources */,
+				55EC7946195DA8E4005308B6 /* Notes.txt in Resources */,
 				55EC7926195D9C35005308B6 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

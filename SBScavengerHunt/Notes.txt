@@ -1,0 +1,23 @@
+//
+// Notes.txt
+//
+
+
+Home screen shows two options: create a hunt, find a hunt.
+
+"Create a hunt" allows the Hunt Master to make a new Hunt record, give it
+a description/explanation, and tag iBeacons as hunt targets. Each target
+can have different hints based on proximity; out-of-range, far, near, immediate.
+
+When the Hunt Master is done, he broadcasts the hunt for others to play.
+
+Others enter a searching state when they tap "Find a hunt." receive the game data and play it
+
+Others join through GKSession or MiltiPeer Connectivity
+http://stackoverflow.com/questions/11828853/how-to-transfer-data-between-phones-over-gksession-without-using-gkpeerpicker
+https://developer.apple.com/library/ios/documentation/MultipeerConnectivity/Reference/MultipeerConnectivityFramework/Introduction/Introduction.html
+
+Gameplay modes:
+
+1. players receive all targets at the start of the game
+2. a new target is only transmitted to players after the previous target is completed successfully
