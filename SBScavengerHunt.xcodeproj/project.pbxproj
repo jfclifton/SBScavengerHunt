@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		06D0B6F7694B4BDD9769CADF /* libPods-SBScavengerHunt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EA5825F15F44FE78AC25B05 /* libPods-SBScavengerHunt.a */; };
+		55CC9D72195DB54900336F00 /* Hunt.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CC9D71195DB54900336F00 /* Hunt.m */; };
+		55CC9D75195DB54A00336F00 /* HuntTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CC9D74195DB54A00336F00 /* HuntTarget.m */; };
+		55CC9D79195DB58C00336F00 /* Hunt+Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CC9D78195DB58C00336F00 /* Hunt+Tools.m */; };
 		55EC791C195D9C35005308B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EC791B195D9C35005308B6 /* AppDelegate.swift */; };
 		55EC791F195D9C35005308B6 /* SBScavengerHunt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 55EC791D195D9C35005308B6 /* SBScavengerHunt.xcdatamodeld */; };
 		55EC7921195D9C35005308B6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EC7920195D9C35005308B6 /* ViewController.swift */; };
@@ -31,6 +34,12 @@
 
 /* Begin PBXFileReference section */
 		2EA5825F15F44FE78AC25B05 /* libPods-SBScavengerHunt.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SBScavengerHunt.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		55CC9D70195DB54900336F00 /* Hunt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hunt.h; sourceTree = "<group>"; };
+		55CC9D71195DB54900336F00 /* Hunt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Hunt.m; sourceTree = "<group>"; };
+		55CC9D73195DB54A00336F00 /* HuntTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HuntTarget.h; sourceTree = "<group>"; };
+		55CC9D74195DB54A00336F00 /* HuntTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HuntTarget.m; sourceTree = "<group>"; };
+		55CC9D77195DB58C00336F00 /* Hunt+Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Hunt+Tools.h"; sourceTree = "<group>"; };
+		55CC9D78195DB58C00336F00 /* Hunt+Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Hunt+Tools.m"; sourceTree = "<group>"; };
 		55EC7916195D9C35005308B6 /* SBScavengerHunt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SBScavengerHunt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55EC791A195D9C35005308B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55EC791B195D9C35005308B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -69,6 +78,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		55CC9D76195DB54E00336F00 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				55EC791D195D9C35005308B6 /* SBScavengerHunt.xcdatamodeld */,
+				55CC9D73195DB54A00336F00 /* HuntTarget.h */,
+				55CC9D74195DB54A00336F00 /* HuntTarget.m */,
+				55CC9D70195DB54900336F00 /* Hunt.h */,
+				55CC9D71195DB54900336F00 /* Hunt.m */,
+				55CC9D77195DB58C00336F00 /* Hunt+Tools.h */,
+				55CC9D78195DB58C00336F00 /* Hunt+Tools.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		55EC790D195D9C35005308B6 = {
 			isa = PBXGroup;
 			children = (
@@ -97,7 +120,7 @@
 				55EC7920195D9C35005308B6 /* ViewController.swift */,
 				55EC7922195D9C35005308B6 /* Main.storyboard */,
 				55EC7925195D9C35005308B6 /* Images.xcassets */,
-				55EC791D195D9C35005308B6 /* SBScavengerHunt.xcdatamodeld */,
+				55CC9D76195DB54E00336F00 /* Model */,
 				55EC7919195D9C35005308B6 /* Supporting Files */,
 				55EC793B195D9D21005308B6 /* SBScavengerHunt-Bridging-Header.h */,
 			);
@@ -274,9 +297,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55CC9D72195DB54900336F00 /* Hunt.m in Sources */,
+				55CC9D75195DB54A00336F00 /* HuntTarget.m in Sources */,
 				55EC7921195D9C35005308B6 /* ViewController.swift in Sources */,
 				55EC791F195D9C35005308B6 /* SBScavengerHunt.xcdatamodeld in Sources */,
 				55EC791C195D9C35005308B6 /* AppDelegate.swift in Sources */,
+				55CC9D79195DB58C00336F00 /* Hunt+Tools.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

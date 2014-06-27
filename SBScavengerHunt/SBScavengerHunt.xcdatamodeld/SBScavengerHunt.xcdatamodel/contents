@@ -1,4 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="Test1.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6172.12" systemVersion="13D65" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Hunt" representedClassName="Hunt" syncable="YES">
+        <attribute name="huntDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="targets" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="HuntTarget" inverseName="hunt" inverseEntity="HuntTarget" syncable="YES"/>
+    </entity>
+    <entity name="HuntTarget" representedClassName="HuntTarget" syncable="YES">
+        <attribute name="descFar" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="descImmediate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="descNear" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="descOutOfRange" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="par" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="hunt" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Hunt" inverseName="targets" inverseEntity="Hunt" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Hunt" positionX="-72" positionY="-27" width="128" height="88"/>
+        <element name="HuntTarget" positionX="-18" positionY="101" width="128" height="148"/>
+    </elements>
 </model>
