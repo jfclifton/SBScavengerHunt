@@ -11,6 +11,6 @@
 
 @interface Hunt (Tools)
 
-- (NSString*)jsonValue;
+- (NSData*)jsonData;
 
 @end

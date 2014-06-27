@@ -9,10 +9,9 @@
 import UIKit
 import MultipeerConnectivity
 
-class ViewController: UIViewController, MCNearbyServiceBrowserDelegate, MCBrowserViewControllerDelegate {
+class ViewController: UIViewController {
     
     var moc: NSManagedObjectContext?
-    var theSession : MCSession?
     
     var browser : MCNearbyServiceBrowser?
     var browserVC : MCBrowserViewController?
@@ -30,7 +29,6 @@ class ViewController: UIViewController, MCNearbyServiceBrowserDelegate, MCBrowse
 
     @IBAction func onCreatePressed(sender: AnyObject) {
         var createVC = CreateHuntViewController(nibName:"CreateHuntViewController", bundle:nil)
-        createVC.session = theSession
         self.navigationController.pushViewController(createVC, animated: true)
         
 //        var newHuntVC = MakeNewHuntViewController(nibName:"MakeNewHuntViewController", bundle:nil)
@@ -39,50 +37,9 @@ class ViewController: UIViewController, MCNearbyServiceBrowserDelegate, MCBrowse
     }
 
     @IBAction func onFind(sender: AnyObject) {
-        browser = MCNearbyServiceBrowser(peer: MCPeerID(displayName: UIDevice.currentDevice().name), serviceType:"SB-Hunt")
-        browser!.delegate = self
-        
-        theSession = MCSession(peer: MCPeerID(displayName: UIDevice.currentDevice().name))
-        
-        browserVC = MCBrowserViewController(browser: browser, session: theSession)
-        browserVC!.delegate = self
-        
-        self.presentViewController(browserVC, animated: true, completion: {
-            self.browser!.startBrowsingForPeers()
-            })
-        
-        
+        let findVC = FindHuntViewController(nibName: "FindHuntViewController", bundle: nil)
+        navigationController.pushViewController(findVC, animated: true)
     }
     
-//    func browserViewController(browserViewController: MCBrowserViewController!, shouldPresentNearbyPeer peerID: MCPeerID!, withDiscoveryInfo info: NSDictionary!) -> Bool
-//    {
-//        return true
-//    }
-    
-    func browserViewControllerDidFinish(browserViewController: MCBrowserViewController!)
-    {
-        
-    }
-    
-    func browserViewControllerWasCancelled(browserViewController: MCBrowserViewController!)
-    {
-        browserViewController.dismissViewControllerAnimated(true, completion: {
-            self.browser!.stopBrowsingForPeers()
-            })
-    }
-    
-    
-    
-    func browser(browser: MCNearbyServiceBrowser!, foundPeer peerID: MCPeerID!, withDiscoveryInfo info: NSDictionary!)
-    {
-        println("peer: \(peerID.displayName)")
-        browser.invitePeer(peerID, toSession: theSession, withContext: nil, timeout: 1000)
-        
-    }
-    
-    func browser(browser: MCNearbyServiceBrowser!, lostPeer peerID: MCPeerID!)
-    {
-        
-    }
 }
 

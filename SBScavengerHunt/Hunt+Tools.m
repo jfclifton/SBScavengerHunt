@@ -10,15 +10,14 @@
 
 @implementation Hunt (Tools)
 
-- (NSString*)jsonValue
+- (NSData*)jsonData
 {
     NSDictionary *exportDict = @{
                                  @"hunt" : self.title,
                                  @"description" : self.huntDescription,
                                  @"targets" : [self.targets array]
                                  };
-    NSData *json = [NSJSONSerialization dataWithJSONObject:exportDict options:0 error:nil];
-    return [[NSString alloc] initWithData:json encoding:NSUTF8StringEncoding];
+    return [NSJSONSerialization dataWithJSONObject:exportDict options:0 error:nil];
 }
 
 @end
