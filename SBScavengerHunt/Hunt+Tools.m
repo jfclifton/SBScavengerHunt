@@ -12,7 +12,13 @@
 
 - (NSString*)jsonValue
 {
-    return @"TODO";
+    NSDictionary *exportDict = @{
+                                 @"hunt" : self.title,
+                                 @"description" : self.huntDescription,
+                                 @"targets" : [self.targets array]
+                                 };
+    NSData *json = [NSJSONSerialization dataWithJSONObject:exportDict options:0 error:nil];
+    return [[NSString alloc] initWithData:json encoding:NSUTF8StringEncoding];
 }
 
 @end
