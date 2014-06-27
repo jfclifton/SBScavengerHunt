@@ -49,7 +49,9 @@ class CreateHuntViewController : UIViewController, MCNearbyServiceBrowserDelegat
     //MARK: MCSessionDelegate
     
     func session(session: MCSession!, peer peerID: MCPeerID!, didChangeState state: MCSessionState) {
-        if state == MCSessionState.Connected {
+        if state == MCSessionState.NotConnected {
+            session.connectPeer(peerID, withNearbyConnectionData: nil)
+        } else if state == MCSessionState.Connected {
             session.sendData(hunt!.jsonData(), toPeers: [peerID], withMode: MCSessionSendDataMode.Reliable, error: nil)
         }
     }
