@@ -19,6 +19,7 @@ class FindHuntViewController: UIViewController, MCNearbyServiceAdvertiserDelegat
     
     var targetBeacon: ESTBeacon?
     var beaconManager: ESTBeaconManager?
+    var beaconTargets
 
     @IBOutlet var huntDescLabel: UILabel
     
