@@ -9,14 +9,19 @@
 import UIKit
 import MultipeerConnectivity
 
-class FindHuntViewController: UIViewController, MCNearbyServiceAdvertiserDelegate, UIActionSheetDelegate, MCSessionDelegate {
+class FindHuntViewController: UIViewController, MCNearbyServiceAdvertiserDelegate, UIActionSheetDelegate, MCSessionDelegate, ESTBeaconManagerDelegate {
     
     var hunt: Hunt?
     var localPeerID = MCPeerID(displayName:UIDevice.currentDevice().name)
     var advertiser : MCNearbyServiceAdvertiser?
     var invitationHandler : ((Bool, MCSession!) -> Void)?
     var theSession : MCSession?
+    
+    var targetBeacon: ESTBeacon?
+    var beaconManager: ESTBeaconManager?
 
+    @IBOutlet var huntDescLabel: UILabel
+    
     init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         // Custom initialization
@@ -24,6 +29,12 @@ class FindHuntViewController: UIViewController, MCNearbyServiceAdvertiserDelegat
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        beaconManager = ESTBeaconManager()
+        beaconManager!.delegate = self;
+        var uuid = NSUUID(UUIDString: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")
+        var beaconRegion = ESTBeaconRegion(proximityUUID: uuid, identifier: "estimote")
+        beaconManager!.startRangingBeaconsInRegion(beaconRegion)
         
         theSession = MCSession(peer: localPeerID)
         theSession!.delegate = self
