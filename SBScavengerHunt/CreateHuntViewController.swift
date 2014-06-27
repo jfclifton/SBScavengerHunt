@@ -13,7 +13,7 @@ import MultipeerConnectivity
 class CreateHuntViewController : UIViewController, MCNearbyServiceAdvertiserDelegate, UIActionSheetDelegate {
     
     var localPeerID = MCPeerID(displayName:UIDevice.currentDevice().name)
-    var advertiser : MCNearbyServiceAdvertiser = MCNearbyServiceAdvertiser()
+    var advertiser : MCNearbyServiceAdvertiser?
     
     var invitationHandler : ((Bool, MCSession!) -> Void)?
     var session : MCSession?
@@ -28,8 +28,8 @@ class CreateHuntViewController : UIViewController, MCNearbyServiceAdvertiserDele
         super.viewDidLoad()
         
         advertiser = MCNearbyServiceAdvertiser(peer:localPeerID, discoveryInfo:nil, serviceType:"SB-Hunt")
-        advertiser.delegate = self;
-        advertiser.startAdvertisingPeer()
+        advertiser!.delegate = self;
+        advertiser!.startAdvertisingPeer()
     }
     
     func advertiser(advertiser: MCNearbyServiceAdvertiser!, didReceiveInvitationFromPeer peerID: MCPeerID!, withContext context: NSData!, invitationHandler: ((Bool, MCSession!) -> Void)!)
@@ -42,8 +42,6 @@ class CreateHuntViewController : UIViewController, MCNearbyServiceAdvertiserDele
         actionSheet.addButtonWithTitle("Accept")
         actionSheet.cancelButtonIndex = 0;
         actionSheet.showInView(self.view)
-        
-        session = MCSession(peer:peerID)
         
         self.invitationHandler = invitationHandler
     
