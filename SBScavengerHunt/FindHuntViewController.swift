@@ -105,8 +105,9 @@ class FindHuntViewController: UIViewController, MCNearbyServiceAdvertiserDelegat
         var major = target!["major"].intValue
         var minor = target!["minor"].intValue
         
-        var beaconRegion = ESTBeaconRegion(proximityUUID: uuid, major: CLBeaconMajorValue(major), minor: CLBeaconMinorValue(minor), identifier: "test")
-
+//        var beaconRegion = ESTBeaconRegion(proximityUUID: uuid, major: CLBeaconMajorValue(major), minor: CLBeaconMinorValue(minor), identifier: "test")
+        var beaconRegion = ESTBeaconRegion(proximityUUID: uuid, identifier: "estimote")
+        
         beaconManager!.startRangingBeaconsInRegion(beaconRegion)
     }
     
