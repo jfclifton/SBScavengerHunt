@@ -16,6 +16,7 @@ class FindHuntViewController: UIViewController, MCNearbyServiceAdvertiserDelegat
     var advertiser : MCNearbyServiceAdvertiser?
     var invitationHandler : ((Bool, MCSession!) -> Void)?
     var theSession : MCSession?
+    var beaconTargets
 
     init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
