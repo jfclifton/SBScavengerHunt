@@ -14,6 +14,9 @@ class ViewController: UIViewController, MCNearbyServiceBrowserDelegate, MCBrowse
     var moc: NSManagedObjectContext?
     var theSession : MCSession?
     
+    var browser : MCNearbyServiceBrowser?
+    var browserVC : MCBrowserViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,16 +39,16 @@ class ViewController: UIViewController, MCNearbyServiceBrowserDelegate, MCBrowse
     }
 
     @IBAction func onFind(sender: AnyObject) {
-        var browser = MCNearbyServiceBrowser(peer: MCPeerID(displayName: UIDevice.currentDevice().name), serviceType:"SB-Hunt")
-        browser.delegate = self
+        browser = MCNearbyServiceBrowser(peer: MCPeerID(displayName: UIDevice.currentDevice().name), serviceType:"SB-Hunt")
+        browser!.delegate = self
         
         theSession = MCSession(peer: MCPeerID(displayName: UIDevice.currentDevice().name))
         
-        var browserVC = MCBrowserViewController(browser: browser, session: theSession)
-        browserVC.delegate = self
+        browserVC = MCBrowserViewController(browser: browser, session: theSession)
+        browserVC!.delegate = self
         
         self.presentViewController(browserVC, animated: true, completion: {
-            browser.startBrowsingForPeers()
+            self.browser!.startBrowsingForPeers()
             })
         
         
@@ -63,7 +66,9 @@ class ViewController: UIViewController, MCNearbyServiceBrowserDelegate, MCBrowse
     
     func browserViewControllerWasCancelled(browserViewController: MCBrowserViewController!)
     {
-        
+        browserViewController.dismissViewControllerAnimated(true, completion: {
+            self.browser!.stopBrowsingForPeers()
+            })
     }
     
     
