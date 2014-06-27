@@ -3,3 +3,5 @@
 //
 
 #import <EstimoteSDK/ESTBeacon.h>
+#import "Hunt.h"
+#import "HuntTarget.h"
