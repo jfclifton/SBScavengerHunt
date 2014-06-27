@@ -9,7 +9,8 @@
 import UIKit
 import MultipeerConnectivity
 
-class FindHuntViewController: UIViewController, MCNearbyServiceAdvertiserDelegate, UIActionSheetDelegate, MCSessionDelegate, ESTBeaconManagerDelegate {
+class FindHuntViewController: UIViewController,
+MCNearbyServiceAdvertiserDelegate, UIActionSheetDelegate, MCSessionDelegate, CLLocationManagerDelegate {
     
     var hunt: Hunt?
     var localPeerID = MCPeerID(displayName:UIDevice.currentDevice().name)
@@ -18,7 +19,8 @@ class FindHuntViewController: UIViewController, MCNearbyServiceAdvertiserDelegat
     var theSession : MCSession?
     
     var targetBeacon: ESTBeacon?
-    var beaconManager: ESTBeaconManager?
+    var beaconManager: CLLocationManager?
+    var beaconRegion: CLBeaconRegion?
     
     var dictionary : NSDictionary?
     var target : NSDictionary?
@@ -27,13 +29,10 @@ class FindHuntViewController: UIViewController, MCNearbyServiceAdvertiserDelegat
     
     init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        // Custom initialization
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
         
         theSession = MCSession(peer: localPeerID)
         theSession!.delegate = self
@@ -59,10 +58,7 @@ class FindHuntViewController: UIViewController, MCNearbyServiceAdvertiserDelegat
         actionSheet.destructiveButtonIndex = 1;
         actionSheet.showInView(self.view)
         
-//        invitationHandler(true, theSession)
         self.invitationHandler = invitationHandler
-        
-    
     }
     
     func actionSheet(__actionSheet: UIActionSheet!,
@@ -92,6 +88,7 @@ class FindHuntViewController: UIViewController, MCNearbyServiceAdvertiserDelegat
     
     // Received data from remote peer
     func session(session: MCSession!, didReceiveData data: NSData!, fromPeer peerID: MCPeerID!) {
+        
         var str = NSString(data: data, encoding: NSUTF8StringEncoding)
         println("received data: \(str)")
         dictionary = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? NSDictionary
@@ -99,16 +96,20 @@ class FindHuntViewController: UIViewController, MCNearbyServiceAdvertiserDelegat
         target = t[0] as? NSDictionary
         huntDescLabel.text = target!["tooFar"] as String
         
-        beaconManager = ESTBeaconManager()
-        beaconManager!.delegate = self;
-        var uuid = NSUUID(UUIDString: target!["proximityUUID"] as String)
-        var major = target!["major"].intValue
-        var minor = target!["minor"].intValue
-        
-//        var beaconRegion = ESTBeaconRegion(proximityUUID: uuid, major: CLBeaconMajorValue(major), minor: CLBeaconMinorValue(minor), identifier: "test")
-        var beaconRegion = ESTBeaconRegion(proximityUUID: uuid, identifier: "estimote")
-        
-        beaconManager!.startRangingBeaconsInRegion(beaconRegion)
+        dispatch_async(dispatch_get_main_queue(), {
+            self.huntDescLabel.text = str
+            self.beaconManager = CLLocationManager()
+            self.beaconManager!.delegate = self;
+            
+            let uuid = NSUUID(UUIDString: self.target!["proximityUUID"] as String)
+            println("uuid: \(uuid)")
+            let major = self.target!["major"].intValue
+            let minor = self.target!["minor"].intValue
+            
+            self.beaconRegion = CLBeaconRegion(proximityUUID: uuid, major: CLBeaconMajorValue(major), minor: CLBeaconMinorValue(minor), identifier: "target")
+            self.beaconManager!.startRangingBeaconsInRegion(self.beaconRegion)
+            
+        })
     }
     
     // Received a byte stream from remote peer
@@ -121,17 +122,10 @@ class FindHuntViewController: UIViewController, MCNearbyServiceAdvertiserDelegat
         println("session resource")
     }
     
-    // Finished receiving a resource from remote peer and saved the content in a temporary location - the app is responsible for moving the file to a permanent location within its sandbox
-    func session(session: MCSession!, didFinishReceivingResourceWithName resourceName: String!, fromPeer peerID: MCPeerID!, atURL localURL: NSURL!, withError error: NSError!) {
-        println("session resource finished")        
-    }
-    
-    func beaconManager(manager: ESTBeaconManager,
-        didRangeBeacons beacons: Array<AnyObject>,
-        inRegion region: ESTBeaconRegion) {
-            
+    func locationManager(manager: CLLocationManager!, didRangeBeacons beacons: AnyObject[]!, inRegion region: CLBeaconRegion!) {
+        
             if beacons.count > 0 {
-                let beacon : ESTBeacon = beacons[0] as ESTBeacon
+                let beacon : CLBeacon = beacons[0] as CLBeacon
                 if beacon.proximity == CLProximity.Far {
                     huntDescLabel.text = target!["far"] as String
                 } else if (beacon.proximity == CLProximity.Near) {
@@ -143,4 +137,10 @@ class FindHuntViewController: UIViewController, MCNearbyServiceAdvertiserDelegat
                 }
             }
     }
+    
+    // Finished receiving a resource from remote peer and saved the content in a temporary location - the app is responsible for moving the file to a permanent location within its sandbox
+    func session(session: MCSession!, didFinishReceivingResourceWithName resourceName: String!, fromPeer peerID: MCPeerID!, atURL localURL: NSURL!, withError error: NSError!) {
+        println("session resource finished")        
+    }
+    
 }
