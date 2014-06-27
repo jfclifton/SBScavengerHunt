@@ -9,11 +9,9 @@
 import UIKit
 import MultipeerConnectivity
 
-class ViewController: UIViewController {
-    
-    var moc: NSManagedObjectContext?
 class ViewController: UIViewController, MCNearbyServiceBrowserDelegate, MCBrowserViewControllerDelegate {
     
+    var moc: NSManagedObjectContext?
     var theSession : MCSession?
     
     override func viewDidLoad() {
