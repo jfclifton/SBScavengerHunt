@@ -50,6 +50,7 @@ class FindHuntViewController: UIViewController, MCNearbyServiceAdvertiserDelegat
         actionSheet.showInView(self.view)
         
         self.invitationHandler = invitationHandler
+        
     
     }
     

@@ -28,12 +28,9 @@ class ViewController: UIViewController {
     }
 
     @IBAction func onCreatePressed(sender: AnyObject) {
-        var createVC = CreateHuntViewController(nibName:"CreateHuntViewController", bundle:nil)
-        self.navigationController.pushViewController(createVC, animated: true)
-        
-//        var newHuntVC = MakeNewHuntViewController(nibName:"MakeNewHuntViewController", bundle:nil)
-//        newHuntVC.moc = moc
-//        self.navigationController.pushViewController(newHuntVC, animated: true)
+        var newHuntVC = MakeNewHuntViewController(nibName:"MakeNewHuntViewController", bundle:nil)
+        newHuntVC.moc = moc
+        self.navigationController.pushViewController(newHuntVC, animated: true)
     }
 
     @IBAction func onFind(sender: AnyObject) {

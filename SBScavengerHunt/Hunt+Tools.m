@@ -15,7 +15,7 @@
     NSDictionary *exportDict = @{
                                  @"hunt" : self.title,
                                  @"description" : self.huntDescription,
-                                 @"targets" : [self.targets array]
+                                 @"targets" : (self.targets.count ? [self.targets array] : @"")
                                  };
     return [NSJSONSerialization dataWithJSONObject:exportDict options:0 error:nil];
 }

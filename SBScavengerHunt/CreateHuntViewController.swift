@@ -31,10 +31,10 @@ class CreateHuntViewController : UIViewController, MCNearbyServiceBrowserDelegat
     }
     
     func broadcast() {
-        browser = MCNearbyServiceBrowser(peer: MCPeerID(displayName: UIDevice.currentDevice().name), serviceType:"SB-Hunt")
+        browser = MCNearbyServiceBrowser(peer: localPeerID, serviceType:"SB-Hunt")
         browser!.delegate = self
         
-        theSession = MCSession(peer: MCPeerID(displayName: UIDevice.currentDevice().name))
+        theSession = MCSession(peer: localPeerID)
         theSession!.delegate = self
         browser!.startBrowsingForPeers()
     }
@@ -43,8 +43,12 @@ class CreateHuntViewController : UIViewController, MCNearbyServiceBrowserDelegat
         browser.invitePeer(peerID, toSession: theSession, withContext: nil, timeout: 1000)
     }
     
-    func browser(browser: MCNearbyServiceBrowser!, lostPeer peerID: MCPeerID!) { }
-    func browser(browser: MCNearbyServiceBrowser!, didNotStartBrowsingForPeers error: NSError!) { }
+    func browser(browser: MCNearbyServiceBrowser!, lostPeer peerID: MCPeerID!) {
+        println("lost peer")
+    }
+    func browser(browser: MCNearbyServiceBrowser!, didNotStartBrowsingForPeers error: NSError!) {
+        println("did not start")
+    }
     
     //MARK: MCSessionDelegate
     
@@ -56,10 +60,6 @@ class CreateHuntViewController : UIViewController, MCNearbyServiceBrowserDelegat
         } else if state == MCSessionState.Connected {
             session.sendData(hunt!.jsonData(), toPeers: [peerID], withMode: MCSessionSendDataMode.Reliable, error: nil)
         }
-    }
-    
-    func completion(data: NSData, err: NSError) {
-        
     }
     
     // Received data from remote peer
