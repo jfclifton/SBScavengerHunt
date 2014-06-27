@@ -19,7 +19,9 @@ class FindHuntViewController: UIViewController, MCNearbyServiceAdvertiserDelegat
     
     var targetBeacon: ESTBeacon?
     var beaconManager: ESTBeaconManager?
-    var beaconTargets
+    
+    var dictionary : NSDictionary?
+    var targets : NSDictionary?
 
     @IBOutlet var huntDescLabel: UILabel
     
@@ -31,11 +33,7 @@ class FindHuntViewController: UIViewController, MCNearbyServiceAdvertiserDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        beaconManager = ESTBeaconManager()
-        beaconManager!.delegate = self;
-        var uuid = NSUUID(UUIDString: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")
-        var beaconRegion = ESTBeaconRegion(proximityUUID: uuid, identifier: "estimote")
-        beaconManager!.startRangingBeaconsInRegion(beaconRegion)
+
         
         theSession = MCSession(peer: localPeerID)
         theSession!.delegate = self
@@ -96,7 +94,16 @@ class FindHuntViewController: UIViewController, MCNearbyServiceAdvertiserDelegat
     func session(session: MCSession!, didReceiveData data: NSData!, fromPeer peerID: MCPeerID!) {
         var str = NSString(data: data, encoding: NSUTF8StringEncoding)
         println("received data: \(str)")
-    }
+        dictionary = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? NSDictionary
+        targets = dictionary!["targets"][0] as? NSDictionary
+        
+        beaconManager = ESTBeaconManager()
+        beaconManager!.delegate = self;
+        var uuid = NSUUID(UUIDString: targets!["proximityUUID"] as NSString)
+        var major = targets!["major"] as NSNumber
+        var minor = targets!["minor"] as NSNumber
+        var beaconRegion = ESTBeaconRegion(proximityUUID: uuid, major: CLBeaconMajorValue(major.intValue), minor: CLBeaconMajorValue(minor.intValue), identifier: "estimote")
+        beaconManager!.startRangingBeaconsInRegion(beaconRegion)    }
     
     // Received a byte stream from remote peer
     func session(session: MCSession!, didReceiveStream stream: NSInputStream!, withName streamName: String!, fromPeer peerID: MCPeerID!) {
@@ -111,5 +118,17 @@ class FindHuntViewController: UIViewController, MCNearbyServiceAdvertiserDelegat
     // Finished receiving a resource from remote peer and saved the content in a temporary location - the app is responsible for moving the file to a permanent location within its sandbox
     func session(session: MCSession!, didFinishReceivingResourceWithName resourceName: String!, fromPeer peerID: MCPeerID!, atURL localURL: NSURL!, withError error: NSError!) {
         println("session resource finished")        
+    }
+    
+    func beaconManager(manager: ESTBeaconManager,
+        didRangeBeacons beacons: Array<AnyObject>,
+        inRegion region: ESTBeaconRegion) {
+            
+            if beacons.count > 0 {
+                let beacon : ESTBeacon = beacons[0] as ESTBeacon
+                if beacon.proximity == CLProximity.Far {
+                    
+                }
+            }
     }
 }
