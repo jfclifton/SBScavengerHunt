@@ -119,10 +119,10 @@
 				55EC791B195D9C35005308B6 /* AppDelegate.swift */,
 				55EC7920195D9C35005308B6 /* ViewController.swift */,
 				55EC7922195D9C35005308B6 /* Main.storyboard */,
-				55EC7925195D9C35005308B6 /* Images.xcassets */,
-				55CC9D76195DB54E00336F00 /* Model */,
-				55EC7919195D9C35005308B6 /* Supporting Files */,
 				55EC793B195D9D21005308B6 /* SBScavengerHunt-Bridging-Header.h */,
+				55CC9D76195DB54E00336F00 /* Model */,
+				55EC7925195D9C35005308B6 /* Images.xcassets */,
+				55EC7919195D9C35005308B6 /* Supporting Files */,
 			);
 			path = SBScavengerHunt;
 			sourceTree = "<group>";
