@@ -64,12 +64,6 @@ class FindHuntViewController: UIViewController, MCNearbyServiceAdvertiserDelegat
                 ivh(false, theSession)
             }
         case 1:
-            println("Blocked")
-            if let ivh = invitationHandler
-            {
-                ivh(false, theSession)
-            }
-        case 2:
             println("Accepted")
             if let ivh = invitationHandler
             {
