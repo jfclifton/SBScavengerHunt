@@ -12,6 +12,7 @@ import MultipeerConnectivity
 
 class CreateHuntViewController : UIViewController, MCNearbyServiceAdvertiserDelegate, UIActionSheetDelegate {
     
+    var moc: NSManagedObjectContext?
     var localPeerID = MCPeerID(displayName:UIDevice.currentDevice().name)
     var advertiser : MCNearbyServiceAdvertiser = MCNearbyServiceAdvertiser()
     

@@ -22,14 +22,14 @@ UITableViewDelegate, UITableViewDataSource {
     
     init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        hunt = Hunt(
-            entity: NSEntityDescription.entityForName("Hunt", inManagedObjectContext: moc),
-            insertIntoManagedObjectContext: moc
-        )
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        hunt = Hunt(
+            entity: NSEntityDescription.entityForName("Hunt", inManagedObjectContext: moc),
+            insertIntoManagedObjectContext: moc
+        )
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -41,6 +41,8 @@ UITableViewDelegate, UITableViewDataSource {
         super.didReceiveMemoryWarning()
     }
     
+    //MARK: Interaction
+    
     @IBAction func addNewTargetBtnPressed(sender : AnyObject) {
         let targetVC = MakeNewTargetViewController(nibName: "MakeNewTargetViewController", bundle: nil)
         targetVC.moc = moc
@@ -49,7 +51,9 @@ UITableViewDelegate, UITableViewDataSource {
     }
     
     @IBAction func doneButtonPressed(sender : AnyObject) {
-        // Move to brodcast to local players
+        let broadcastVC = CreateHuntViewController(nibName: "CreateHuntViewController", bundle: nil)
+        //broadcastVC.hunt = hunt
+        self.navigationController.pushViewController(broadcastVC, animated: true)
     }
     
     //MARK: UITableViewDataSource
@@ -65,9 +69,12 @@ UITableViewDelegate, UITableViewDataSource {
     }
     
     //MARK: UITableViewDelegate
+    
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) { }
     
     func updateTargets() {
         targets = hunt!.targets.array as? Array<HuntTarget>
+        println("targets: \(targets)")
+        targetsTableView.reloadData()
     }
 }

@@ -18,6 +18,9 @@
 @dynamic descNear;
 @dynamic descImmediate;
 @dynamic par;
+@dynamic proximity;
+@dynamic major;
+@dynamic minor;
 @dynamic hunt;
 
 @end

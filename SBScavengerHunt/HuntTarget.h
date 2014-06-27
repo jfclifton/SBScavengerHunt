@@ -19,6 +19,9 @@
 @property (nonatomic, retain) NSString * descNear;
 @property (nonatomic, retain) NSString * descImmediate;
 @property (nonatomic, retain) NSNumber * par;
+@property (nonatomic, retain) NSString * proximity;
+@property (nonatomic, retain) NSString * major;
+@property (nonatomic, retain) NSString * minor;
 @property (nonatomic, retain) Hunt *hunt;
 
 @end

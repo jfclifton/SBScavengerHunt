@@ -9,10 +9,14 @@
 import UIKit
 
 class ViewController: UIViewController {
-                            
+    
+    var moc: NSManagedObjectContext?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        var delegate = UIApplication.sharedApplication().delegate as AppDelegate
+        moc = delegate.managedObjectContext
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,9 +25,12 @@ class ViewController: UIViewController {
     }
 
     @IBAction func onCreatePressed(sender: AnyObject) {
-        var createVC = CreateHuntViewController(nibName:"CreateHuntViewController", bundle:nil)
-        self.navigationController.pushViewController(createVC, animated: true)
+//        var createVC = CreateHuntViewController(nibName:"CreateHuntViewController", bundle:nil)
+//        self.navigationController.pushViewController(createVC, animated: true)
         
+        var newHuntVC = MakeNewHuntViewController(nibName:"MakeNewHuntViewController", bundle:nil)
+        newHuntVC.moc = moc
+        self.navigationController.pushViewController(newHuntVC, animated: true)
     }
 
 }

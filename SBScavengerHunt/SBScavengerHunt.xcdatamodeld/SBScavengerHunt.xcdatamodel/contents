@@ -10,12 +10,15 @@
         <attribute name="descImmediate" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="descNear" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="descOutOfRange" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="major" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="minor" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="par" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="proximity" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="hunt" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Hunt" inverseName="targets" inverseEntity="Hunt" syncable="YES"/>
     </entity>
     <elements>
         <element name="Hunt" positionX="-72" positionY="-27" width="128" height="88"/>
-        <element name="HuntTarget" positionX="-18" positionY="101" width="128" height="148"/>
+        <element name="HuntTarget" positionX="-18" positionY="101" width="128" height="193"/>
     </elements>
 </model>

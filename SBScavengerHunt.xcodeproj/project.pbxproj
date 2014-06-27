@@ -11,12 +11,12 @@
 		17767A94195DBF6300DCC84B /* CreateHuntViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17767A92195DBF6300DCC84B /* CreateHuntViewController.swift */; };
 		17767A95195DBF6300DCC84B /* CreateHuntViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17767A93195DBF6300DCC84B /* CreateHuntViewController.xib */; };
 		55CC9D72195DB54900336F00 /* Hunt.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CC9D71195DB54900336F00 /* Hunt.m */; };
-		55CC9D75195DB54A00336F00 /* HuntTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CC9D74195DB54A00336F00 /* HuntTarget.m */; };
 		55CC9D79195DB58C00336F00 /* Hunt+Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CC9D78195DB58C00336F00 /* Hunt+Tools.m */; };
 		55CC9D7C195DB82B00336F00 /* MakeNewHuntViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CC9D7A195DB82B00336F00 /* MakeNewHuntViewController.swift */; };
 		55CC9D7D195DB82B00336F00 /* MakeNewHuntViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55CC9D7B195DB82B00336F00 /* MakeNewHuntViewController.xib */; };
 		55CC9D7F195DBAA300336F00 /* MakeNewTargetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CC9D7E195DBAA300336F00 /* MakeNewTargetViewController.swift */; };
 		55CC9D81195DBABA00336F00 /* MakeNewTargetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55CC9D80195DBABA00336F00 /* MakeNewTargetViewController.xib */; };
+		55CC9D84195DD9D600336F00 /* HuntTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CC9D83195DD9D600336F00 /* HuntTarget.m */; };
 		55EC791C195D9C35005308B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EC791B195D9C35005308B6 /* AppDelegate.swift */; };
 		55EC791F195D9C35005308B6 /* SBScavengerHunt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 55EC791D195D9C35005308B6 /* SBScavengerHunt.xcdatamodeld */; };
 		55EC7921195D9C35005308B6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EC7920195D9C35005308B6 /* ViewController.swift */; };
@@ -44,14 +44,14 @@
 		2EA5825F15F44FE78AC25B05 /* libPods-SBScavengerHunt.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SBScavengerHunt.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55CC9D70195DB54900336F00 /* Hunt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hunt.h; sourceTree = "<group>"; };
 		55CC9D71195DB54900336F00 /* Hunt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Hunt.m; sourceTree = "<group>"; };
-		55CC9D73195DB54A00336F00 /* HuntTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HuntTarget.h; sourceTree = "<group>"; };
-		55CC9D74195DB54A00336F00 /* HuntTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HuntTarget.m; sourceTree = "<group>"; };
 		55CC9D77195DB58C00336F00 /* Hunt+Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Hunt+Tools.h"; sourceTree = "<group>"; };
 		55CC9D78195DB58C00336F00 /* Hunt+Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Hunt+Tools.m"; sourceTree = "<group>"; };
 		55CC9D7A195DB82B00336F00 /* MakeNewHuntViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MakeNewHuntViewController.swift; sourceTree = "<group>"; };
 		55CC9D7B195DB82B00336F00 /* MakeNewHuntViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MakeNewHuntViewController.xib; sourceTree = "<group>"; };
 		55CC9D7E195DBAA300336F00 /* MakeNewTargetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MakeNewTargetViewController.swift; sourceTree = "<group>"; };
 		55CC9D80195DBABA00336F00 /* MakeNewTargetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MakeNewTargetViewController.xib; sourceTree = "<group>"; };
+		55CC9D82195DD9D600336F00 /* HuntTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HuntTarget.h; sourceTree = "<group>"; };
+		55CC9D83195DD9D600336F00 /* HuntTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HuntTarget.m; sourceTree = "<group>"; };
 		55EC7916195D9C35005308B6 /* SBScavengerHunt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SBScavengerHunt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55EC791A195D9C35005308B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55EC791B195D9C35005308B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -93,9 +93,9 @@
 		55CC9D76195DB54E00336F00 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				55CC9D82195DD9D600336F00 /* HuntTarget.h */,
+				55CC9D83195DD9D600336F00 /* HuntTarget.m */,
 				55EC791D195D9C35005308B6 /* SBScavengerHunt.xcdatamodeld */,
-				55CC9D73195DB54A00336F00 /* HuntTarget.h */,
-				55CC9D74195DB54A00336F00 /* HuntTarget.m */,
 				55CC9D70195DB54900336F00 /* Hunt.h */,
 				55CC9D71195DB54900336F00 /* Hunt.m */,
 				55CC9D77195DB58C00336F00 /* Hunt+Tools.h */,
@@ -319,12 +319,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				55CC9D72195DB54900336F00 /* Hunt.m in Sources */,
-				55CC9D75195DB54A00336F00 /* HuntTarget.m in Sources */,
 				55CC9D7C195DB82B00336F00 /* MakeNewHuntViewController.swift in Sources */,
 				55EC7921195D9C35005308B6 /* ViewController.swift in Sources */,
 				17767A94195DBF6300DCC84B /* CreateHuntViewController.swift in Sources */,
 				55CC9D7F195DBAA300336F00 /* MakeNewTargetViewController.swift in Sources */,
 				55EC791F195D9C35005308B6 /* SBScavengerHunt.xcdatamodeld in Sources */,
+				55CC9D84195DD9D600336F00 /* HuntTarget.m in Sources */,
 				55EC791C195D9C35005308B6 /* AppDelegate.swift in Sources */,
 				55CC9D79195DB58C00336F00 /* Hunt+Tools.m in Sources */,
 			);
@@ -445,6 +445,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = SBScavengerHunt/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "SBScavengerHunt/SBScavengerHunt-Bridging-Header.h";
@@ -460,6 +461,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = SBScavengerHunt/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "SBScavengerHunt/SBScavengerHunt-Bridging-Header.h";
