@@ -23,12 +23,9 @@ class ViewController: UIViewController, MCNearbyServiceBrowserDelegate, MCBrowse
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     @IBAction func onCreatePressed(sender: AnyObject) {
-//        var createVC = CreateHuntViewController(nibName:"CreateHuntViewController", bundle:nil)
-//        self.navigationController.pushViewController(createVC, animated: true)
         var createVC = CreateHuntViewController(nibName:"CreateHuntViewController", bundle:nil)
         createVC.session = theSession
         self.navigationController.pushViewController(createVC, animated: true)
@@ -54,12 +51,10 @@ class ViewController: UIViewController, MCNearbyServiceBrowserDelegate, MCBrowse
         
     }
     
-    
-    
-    func browserViewController(browserViewController: MCBrowserViewController!, shouldPresentNearbyPeer peerID: MCPeerID!, withDiscoveryInfo info: NSDictionary!) -> Bool
-    {
-        return true
-    }
+//    func browserViewController(browserViewController: MCBrowserViewController!, shouldPresentNearbyPeer peerID: MCPeerID!, withDiscoveryInfo info: NSDictionary!) -> Bool
+//    {
+//        return true
+//    }
     
     func browserViewControllerDidFinish(browserViewController: MCBrowserViewController!)
     {
@@ -76,6 +71,7 @@ class ViewController: UIViewController, MCNearbyServiceBrowserDelegate, MCBrowse
     func browser(browser: MCNearbyServiceBrowser!, foundPeer peerID: MCPeerID!, withDiscoveryInfo info: NSDictionary!)
     {
         println("peer: \(peerID.displayName)")
+        browser.invitePeer(peerID, toSession: theSession, withContext: nil, timeout: 1000)
         
     }
     

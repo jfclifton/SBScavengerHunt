@@ -52,7 +52,7 @@ UITableViewDelegate, UITableViewDataSource {
     
     @IBAction func doneButtonPressed(sender : AnyObject) {
         let broadcastVC = CreateHuntViewController(nibName: "CreateHuntViewController", bundle: nil)
-        //broadcastVC.hunt = hunt
+        broadcastVC.hunt = hunt
         self.navigationController.pushViewController(broadcastVC, animated: true)
     }
     
