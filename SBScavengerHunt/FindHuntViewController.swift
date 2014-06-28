@@ -16,6 +16,8 @@ class FindHuntViewController: UIViewController, MCNearbyServiceAdvertiserDelegat
     var advertiser : MCNearbyServiceAdvertiser?
     var invitationHandler : ((Bool, MCSession!) -> Void)?
     var theSession : MCSession?
+    let TITLE_ACCEPT = "Accept"
+    let TITLE_REJECT = "Reject"
     
     var targetBeacon: ESTBeacon?
     var beaconManager: ESTBeaconManager?
@@ -27,13 +29,10 @@ class FindHuntViewController: UIViewController, MCNearbyServiceAdvertiserDelegat
     
     init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        // Custom initialization
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
         
         theSession = MCSession(peer: localPeerID)
         theSession!.delegate = self
@@ -50,39 +49,35 @@ class FindHuntViewController: UIViewController, MCNearbyServiceAdvertiserDelegat
 
     func advertiser(advertiser: MCNearbyServiceAdvertiser!, didReceiveInvitationFromPeer peerID: MCPeerID!, withContext context: NSData!, invitationHandler: ((Bool, MCSession!) -> Void)!)
     {
+        self.invitationHandler = invitationHandler
         
         var actionSheet = UIActionSheet()
         actionSheet.delegate = self
         actionSheet.title = "Received Invitation from \(peerID.displayName)"
-        actionSheet.addButtonWithTitle("Accept")
-        actionSheet.addButtonWithTitle("Reject")
+        actionSheet.addButtonWithTitle(TITLE_ACCEPT)
+        actionSheet.addButtonWithTitle(TITLE_REJECT)
         actionSheet.destructiveButtonIndex = 1;
         actionSheet.showInView(self.view)
-        
-//        invitationHandler(true, theSession)
-        self.invitationHandler = invitationHandler
-        
-    
     }
     
     func actionSheet(__actionSheet: UIActionSheet!,
         clickedButtonAtIndex buttonIndex: Int)
     {
         switch buttonIndex {
-        case 0:
+        case __actionSheet.buttonTitleAtIndex(buttonIndex) == TITLE_ACCEPT:
             println("Accepted")
             if let ivh = invitationHandler
             {
                 ivh(true, theSession)
             }
-        case 1:
+        case __actionSheet.buttonTitleAtIndex(buttonIndex) == TITLE_REJECT:
             println("Rejected")
             if let ivh = invitationHandler
             {
                 ivh(false, theSession)
             }
         default:
-            println("nothing")
+            println("WARNING: title not found - \(__actionSheet.buttonTitleAtIndex(buttonIndex))")
         }
     }
     
@@ -90,38 +85,35 @@ class FindHuntViewController: UIViewController, MCNearbyServiceAdvertiserDelegat
         println("peer changed state: \(state)")
     }
     
-    // Received data from remote peer
     func session(session: MCSession!, didReceiveData data: NSData!, fromPeer peerID: MCPeerID!) {
         var str = NSString(data: data, encoding: NSUTF8StringEncoding)
         println("received data: \(str)")
         dictionary = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? NSDictionary
         var t = dictionary!["targets"] as NSArray
         target = t[0] as? NSDictionary
-        huntDescLabel.text = target!["tooFar"] as String
         
-        beaconManager = ESTBeaconManager()
-        beaconManager!.delegate = self;
-        var uuid = NSUUID(UUIDString: target!["proximityUUID"] as String)
-        var major = target!["major"].intValue
-        var minor = target!["minor"].intValue
-        
-//        var beaconRegion = ESTBeaconRegion(proximityUUID: uuid, major: CLBeaconMajorValue(major), minor: CLBeaconMinorValue(minor), identifier: "test")
-        var beaconRegion = ESTBeaconRegion(proximityUUID: uuid, identifier: "estimote")
-        
-        beaconManager!.startRangingBeaconsInRegion(beaconRegion)
+        dispatch_async(dispatch_get_main_queue(), {
+            self.huntDescLabel.text = self.target!["tooFar"] as String
+            
+            self.beaconManager = ESTBeaconManager()
+            self.beaconManager!.delegate = self;
+            var uuid = NSUUID(UUIDString: self.target!["proximityUUID"] as String)
+            var major = self.target!["major"].intValue
+            var minor = self.target!["minor"].intValue
+            
+            var beaconRegion = ESTBeaconRegion(proximityUUID: uuid, major: CLBeaconMajorValue(major), minor: CLBeaconMinorValue(minor), identifier: "test")
+            self.beaconManager!.startRangingBeaconsInRegion(beaconRegion)
+            })
     }
     
-    // Received a byte stream from remote peer
     func session(session: MCSession!, didReceiveStream stream: NSInputStream!, withName streamName: String!, fromPeer peerID: MCPeerID!) {
         println("session stream")
     }
     
-    // Start receiving a resource from remote peer
     func session(session: MCSession!, didStartReceivingResourceWithName resourceName: String!, fromPeer peerID: MCPeerID!, withProgress progress: NSProgress!) {
         println("session resource")
     }
     
-    // Finished receiving a resource from remote peer and saved the content in a temporary location - the app is responsible for moving the file to a permanent location within its sandbox
     func session(session: MCSession!, didFinishReceivingResourceWithName resourceName: String!, fromPeer peerID: MCPeerID!, atURL localURL: NSURL!, withError error: NSError!) {
         println("session resource finished")        
     }
