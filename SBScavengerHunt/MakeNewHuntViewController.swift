@@ -9,7 +9,7 @@
 import UIKit
 
 class MakeNewHuntViewController: UIViewController,
-UITableViewDelegate, UITableViewDataSource {
+UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
     var moc : NSManagedObjectContext?
     var hunt : Hunt?
@@ -78,5 +78,12 @@ UITableViewDelegate, UITableViewDataSource {
         targets = hunt!.targets.array as? Array<HuntTarget>
         println("targets: \(targets)")
         targetsTableView.reloadData()
+    }
+    
+    //MARK: UITextFieldDelegate
+    func textFieldShouldReturn(textField: UITextField!) -> Bool
+    {
+        textField.resignFirstResponder()
+        return false
     }
 }
