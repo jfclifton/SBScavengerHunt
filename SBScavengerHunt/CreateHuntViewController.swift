@@ -36,17 +36,20 @@ class CreateHuntViewController : UIViewController, MCNearbyServiceBrowserDelegat
         browser!.startBrowsingForPeers()
     }
     
-    func browser(browser: MCNearbyServiceBrowser!, foundPeer peerID: MCPeerID!, withDiscoveryInfo info: NSDictionary!) {
+    func browser(browser: MCNearbyServiceBrowser!, foundPeer peerID: MCPeerID!, withDiscoveryInfo info: [NSObject : AnyObject]!)
+    {
         browser.invitePeer(peerID, toSession: theSession, withContext: nil, timeout: 1000)
     }
     
     func browser(browser: MCNearbyServiceBrowser!, lostPeer peerID: MCPeerID!) {
         println("lost peer")
     }
-    func browser(browser: MCNearbyServiceBrowser!, didNotStartBrowsingForPeers error: NSError!) {
+    
+    func browser(browser: MCNearbyServiceBrowser!, didNotStartBrowsingForPeers error: NSError!)
+    {
         println("did not start")
     }
-    
+        
     //MARK: MCSessionDelegate
     
     func session(session: MCSession!, peer peerID: MCPeerID!, didChangeState state: MCSessionState) {

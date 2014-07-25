@@ -66,7 +66,7 @@ UITableViewDelegate, UITableViewDataSource {
     
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
         let cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "ReuseID")
-        cell.text = "\(targets![indexPath.row].title)"
+        cell.textLabel.text = "\(targets![indexPath.row].title)"
         return cell
     }
     
