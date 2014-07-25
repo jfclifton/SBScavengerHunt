@@ -48,7 +48,7 @@ class MyHuntsViewController: UIViewController, UITableViewDataSource, UITableVie
         if (cell == nil) {
             cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "huntCell")
         }
-        cell.text = hunts[indexPath.row].title
+        cell.textLabel.text = hunts[indexPath.row].title
         return cell
     }
 }
