@@ -31,6 +31,8 @@ class CreateHuntViewController : UIViewController, MCNearbyServiceBrowserDelegat
         browser = MCNearbyServiceBrowser(peer: localPeerID, serviceType:"SB-Hunt")
         browser!.delegate = self
         
+        var label : UILabel?
+        label = UILabel()
         theSession = MCSession(peer: localPeerID)
         theSession!.delegate = self
         browser!.startBrowsingForPeers()

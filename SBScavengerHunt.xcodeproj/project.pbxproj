@@ -12,6 +12,8 @@
 		17767A95195DBF6300DCC84B /* CreateHuntViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17767A93195DBF6300DCC84B /* CreateHuntViewController.xib */; };
 		550C1B1A195DEAB000D3AA9F /* FindHuntViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550C1B18195DEAB000D3AA9F /* FindHuntViewController.swift */; };
 		550C1B1B195DEAB000D3AA9F /* FindHuntViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 550C1B19195DEAB000D3AA9F /* FindHuntViewController.xib */; };
+		55A5D45F19829E1B00B00BB6 /* MyHuntsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A5D45D19829E1B00B00BB6 /* MyHuntsViewController.swift */; };
+		55A5D46019829E1B00B00BB6 /* MyHuntsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55A5D45E19829E1B00B00BB6 /* MyHuntsViewController.xib */; };
 		55CC9D72195DB54900336F00 /* Hunt.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CC9D71195DB54900336F00 /* Hunt.m */; };
 		55CC9D79195DB58C00336F00 /* Hunt+Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CC9D78195DB58C00336F00 /* Hunt+Tools.m */; };
 		55CC9D7C195DB82B00336F00 /* MakeNewHuntViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CC9D7A195DB82B00336F00 /* MakeNewHuntViewController.swift */; };
@@ -46,6 +48,8 @@
 		2EA5825F15F44FE78AC25B05 /* libPods-SBScavengerHunt.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SBScavengerHunt.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		550C1B18195DEAB000D3AA9F /* FindHuntViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindHuntViewController.swift; sourceTree = "<group>"; };
 		550C1B19195DEAB000D3AA9F /* FindHuntViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FindHuntViewController.xib; sourceTree = "<group>"; };
+		55A5D45D19829E1B00B00BB6 /* MyHuntsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyHuntsViewController.swift; sourceTree = "<group>"; };
+		55A5D45E19829E1B00B00BB6 /* MyHuntsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyHuntsViewController.xib; sourceTree = "<group>"; };
 		55CC9D70195DB54900336F00 /* Hunt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hunt.h; sourceTree = "<group>"; };
 		55CC9D71195DB54900336F00 /* Hunt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Hunt.m; sourceTree = "<group>"; };
 		55CC9D77195DB58C00336F00 /* Hunt+Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Hunt+Tools.h"; sourceTree = "<group>"; };
@@ -144,6 +148,8 @@
 				55CC9D80195DBABA00336F00 /* MakeNewTargetViewController.xib */,
 				550C1B18195DEAB000D3AA9F /* FindHuntViewController.swift */,
 				550C1B19195DEAB000D3AA9F /* FindHuntViewController.xib */,
+				55A5D45D19829E1B00B00BB6 /* MyHuntsViewController.swift */,
+				55A5D45E19829E1B00B00BB6 /* MyHuntsViewController.xib */,
 				55CC9D76195DB54E00336F00 /* Model */,
 				55EC7925195D9C35005308B6 /* Images.xcassets */,
 				55EC7919195D9C35005308B6 /* Supporting Files */,
@@ -269,6 +275,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				55CC9D7D195DB82B00336F00 /* MakeNewHuntViewController.xib in Resources */,
+				55A5D46019829E1B00B00BB6 /* MyHuntsViewController.xib in Resources */,
 				17767A95195DBF6300DCC84B /* CreateHuntViewController.xib in Resources */,
 				55CC9D81195DBABA00336F00 /* MakeNewTargetViewController.xib in Resources */,
 				55EC7924195D9C35005308B6 /* Main.storyboard in Resources */,
@@ -333,6 +340,7 @@
 				55CC9D7F195DBAA300336F00 /* MakeNewTargetViewController.swift in Sources */,
 				55EC791F195D9C35005308B6 /* SBScavengerHunt.xcdatamodeld in Sources */,
 				55CC9D84195DD9D600336F00 /* HuntTarget.m in Sources */,
+				55A5D45F19829E1B00B00BB6 /* MyHuntsViewController.swift in Sources */,
 				55EC791C195D9C35005308B6 /* AppDelegate.swift in Sources */,
 				55CC9D79195DB58C00336F00 /* Hunt+Tools.m in Sources */,
 			);
