@@ -95,8 +95,8 @@ MCNearbyServiceAdvertiserDelegate, UIActionSheetDelegate, MCSessionDelegate, CLL
         target = t[0] as? NSDictionary
 
         dispatch_async(dispatch_get_main_queue(), {
-
-            huntDescLabel.text = target!["tooFar"] as String
+            
+            self.huntDescLabel.text = self.target!["tooFar"] as String
             self.huntDescLabel.text = str
             self.beaconManager = CLLocationManager()
             self.beaconManager!.delegate = self;
@@ -141,11 +141,6 @@ MCNearbyServiceAdvertiserDelegate, UIActionSheetDelegate, MCSessionDelegate, CLL
                     huntDescLabel.text = target!["tooFar"] as String
                 }
             }
-    }
-    
-    // Finished receiving a resource from remote peer and saved the content in a temporary location - the app is responsible for moving the file to a permanent location within its sandbox
-    func session(session: MCSession!, didFinishReceivingResourceWithName resourceName: String!, fromPeer peerID: MCPeerID!, atURL localURL: NSURL!, withError error: NSError!) {
-        println("session resource finished")        
     }
     
 }
