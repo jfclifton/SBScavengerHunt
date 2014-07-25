@@ -59,6 +59,7 @@ UITextFieldDelegate, UITextViewDelegate, ESTBeaconManagerDelegate {
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
+        saveCurrentDescription()
         saveIfBeaconFound()
     }
     
@@ -108,12 +109,16 @@ UITextFieldDelegate, UITextViewDelegate, ESTBeaconManagerDelegate {
     
     @IBAction func segmentedControlDidChange(sender : AnyObject) {
         if selectedSegmentIndex != segmentedControl.selectedSegmentIndex {
-            if let i = selectedSegmentIndex {
-                descriptions[i] = hintTextField.text
-            }
+            saveCurrentDescription()
             selectedSegmentIndex = segmentedControl.selectedSegmentIndex
             hintTextField.text = descriptions[segmentedControl.selectedSegmentIndex]
             updatePlaceholderLabel(hintTextField)
+        }
+    }
+    
+    func saveCurrentDescription() {
+        if let i = selectedSegmentIndex {
+            descriptions[i] = hintTextField.text
         }
     }
     
