@@ -17,6 +17,8 @@ MCNearbyServiceAdvertiserDelegate, UIActionSheetDelegate, MCSessionDelegate, CLL
     var advertiser : MCNearbyServiceAdvertiser?
     var invitationHandler : ((Bool, MCSession!) -> Void)?
     var theSession : MCSession?
+    let TITLE_ACCEPT = "Accept"
+    let TITLE_REJECT = "Reject"
     
     var targetBeacon: ESTBeacon?
     var beaconManager: CLLocationManager?
@@ -53,32 +55,30 @@ MCNearbyServiceAdvertiserDelegate, UIActionSheetDelegate, MCSessionDelegate, CLL
         var actionSheet = UIActionSheet()
         actionSheet.delegate = self
         actionSheet.title = "Received Invitation from \(peerID.displayName)"
-        actionSheet.addButtonWithTitle("Accept")
-        actionSheet.addButtonWithTitle("Reject")
+        actionSheet.addButtonWithTitle(TITLE_ACCEPT)
+        actionSheet.addButtonWithTitle(TITLE_REJECT)
         actionSheet.destructiveButtonIndex = 1;
         actionSheet.showInView(self.view)
-        
-        self.invitationHandler = invitationHandler
     }
     
     func actionSheet(__actionSheet: UIActionSheet!,
         clickedButtonAtIndex buttonIndex: Int)
     {
         switch buttonIndex {
-        case 0:
+        case __actionSheet.buttonTitleAtIndex(buttonIndex) == TITLE_ACCEPT:
             println("Accepted")
             if let ivh = invitationHandler
             {
                 ivh(true, theSession)
             }
-        case 1:
+        case __actionSheet.buttonTitleAtIndex(buttonIndex) == TITLE_REJECT:
             println("Rejected")
             if let ivh = invitationHandler
             {
                 ivh(false, theSession)
             }
         default:
-            println("nothing")
+            println("WARNING: title not found - \(__actionSheet.buttonTitleAtIndex(buttonIndex))")
         }
     }
     
@@ -86,7 +86,6 @@ MCNearbyServiceAdvertiserDelegate, UIActionSheetDelegate, MCSessionDelegate, CLL
         println("peer changed state: \(state)")
     }
     
-    // Received data from remote peer
     func session(session: MCSession!, didReceiveData data: NSData!, fromPeer peerID: MCPeerID!) {
         
         var str = NSString(data: data, encoding: NSUTF8StringEncoding)
@@ -94,9 +93,10 @@ MCNearbyServiceAdvertiserDelegate, UIActionSheetDelegate, MCSessionDelegate, CLL
         dictionary = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? NSDictionary
         var t = dictionary!["targets"] as NSArray
         target = t[0] as? NSDictionary
-        huntDescLabel.text = target!["tooFar"] as String
-        
+
         dispatch_async(dispatch_get_main_queue(), {
+
+            huntDescLabel.text = target!["tooFar"] as String
             self.huntDescLabel.text = str
             self.beaconManager = CLLocationManager()
             self.beaconManager!.delegate = self;
@@ -110,20 +110,25 @@ MCNearbyServiceAdvertiserDelegate, UIActionSheetDelegate, MCSessionDelegate, CLL
             self.beaconManager!.startRangingBeaconsInRegion(self.beaconRegion)
             
         })
+        
     }
     
-    // Received a byte stream from remote peer
     func session(session: MCSession!, didReceiveStream stream: NSInputStream!, withName streamName: String!, fromPeer peerID: MCPeerID!) {
         println("session stream")
     }
     
-    // Start receiving a resource from remote peer
     func session(session: MCSession!, didStartReceivingResourceWithName resourceName: String!, fromPeer peerID: MCPeerID!, withProgress progress: NSProgress!) {
         println("session resource")
     }
     
-    func locationManager(manager: CLLocationManager!, didRangeBeacons beacons: AnyObject[]!, inRegion region: CLBeaconRegion!) {
-        
+    func session(session: MCSession!, didFinishReceivingResourceWithName resourceName: String!, fromPeer peerID: MCPeerID!, atURL localURL: NSURL!, withError error: NSError!) {
+        println("session resource finished")        
+    }
+    
+    func beaconManager(manager: ESTBeaconManager,
+        didRangeBeacons beacons: Array<AnyObject>,
+        inRegion region: ESTBeaconRegion) {
+            
             if beacons.count > 0 {
                 let beacon : CLBeacon = beacons[0] as CLBeacon
                 if beacon.proximity == CLProximity.Far {
