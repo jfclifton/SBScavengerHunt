@@ -75,8 +75,8 @@ UITextFieldDelegate, UITextViewDelegate, ESTBeaconManagerDelegate {
                 if immediate.count > 1 {
                 } else if immediate.count == 1 {
                     if (immediate[0] != targetBeacon) {
-                        targetBeacon = immediate[0]
-                        if (!isDuplicateTarget(targetBeacon!)) {
+                        if (!isDuplicateTarget(immediate[0])) {
+                            targetBeacon = immediate[0]
                             println("found beacon: \(targetBeacon!)")
                             updateBeaconDisplay()
                         }
