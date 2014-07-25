@@ -52,18 +52,25 @@ MCNearbyServiceAdvertiserDelegate, UIActionSheetDelegate, MCSessionDelegate, CLL
     func advertiser(advertiser: MCNearbyServiceAdvertiser!, didReceiveInvitationFromPeer peerID: MCPeerID!, withContext context: NSData!, invitationHandler: ((Bool, MCSession!) -> Void)!)
     {
         
-        var actionSheet = UIActionSheet()
+        var actionSheet = UIActionSheet(
+            title: "Received Invitation from \(peerID.displayName)",
+            delegate: self,
+            cancelButtonTitle: TITLE_ACCEPT,
+            destructiveButtonTitle: TITLE_REJECT
+        )
         actionSheet.delegate = self
-        actionSheet.title = "Received Invitation from \(peerID.displayName)"
-        actionSheet.addButtonWithTitle(TITLE_ACCEPT)
-        actionSheet.addButtonWithTitle(TITLE_REJECT)
-        actionSheet.destructiveButtonIndex = 1;
+        self.invitationHandler = invitationHandler
+//        actionSheet.title = "Received Invitation from \(peerID.displayName)"
+//        actionSheet.addButtonWithTitle(TITLE_ACCEPT)
+//        actionSheet.addButtonWithTitle(TITLE_REJECT)
+//        actionSheet.destructiveButtonIndex = 1;
         actionSheet.showInView(self.view)
     }
     
     func actionSheet(__actionSheet: UIActionSheet!,
         clickedButtonAtIndex buttonIndex: Int)
     {
+        println("ButtonIndex: \(buttonIndex)")
         switch buttonIndex {
         case __actionSheet.buttonTitleAtIndex(buttonIndex) == TITLE_ACCEPT:
             println("Accepted")
@@ -96,8 +103,8 @@ MCNearbyServiceAdvertiserDelegate, UIActionSheetDelegate, MCSessionDelegate, CLL
 
         dispatch_async(dispatch_get_main_queue(), {
             
-            self.huntDescLabel.text = self.target!["tooFar"] as String
-            self.huntDescLabel.text = str
+            //self.huntDescLabel.text = self.target!["tooFar"] as String
+            
             self.beaconManager = CLLocationManager()
             self.beaconManager!.delegate = self;
             
@@ -125,10 +132,7 @@ MCNearbyServiceAdvertiserDelegate, UIActionSheetDelegate, MCSessionDelegate, CLL
         println("session resource finished")        
     }
     
-    func beaconManager(manager: ESTBeaconManager,
-        didRangeBeacons beacons: Array<AnyObject>,
-        inRegion region: ESTBeaconRegion) {
-            
+    func locationManager(manager: CLLocationManager!, didRangeBeacons beacons: [AnyObject]!, inRegion region: CLBeaconRegion!) {
             if beacons.count > 0 {
                 let beacon : CLBeacon = beacons[0] as CLBeacon
                 if beacon.proximity == CLProximity.Far {
