@@ -9,7 +9,7 @@
 import UIKit
 
 class MakeNewTargetViewController: UIViewController,
-UITextFieldDelegate, ESTBeaconManagerDelegate {
+UITextFieldDelegate, UITextViewDelegate, ESTBeaconManagerDelegate {
     
     var targetBeacon: ESTBeacon?
     var beaconManager: ESTBeaconManager?
@@ -17,11 +17,13 @@ UITextFieldDelegate, ESTBeaconManagerDelegate {
     var hunt: Hunt?
     var target: HuntTarget?
     var descriptions = [/*TooFar*/"", /*Far*/"", /*Near*/"", /*Found*/""]
+    var descriptionPlaceholders = ["Give a hint they are not even close","Hint that they are getting warmer","Hint that they are almost there!","Hint that they are right on top of it!"]
     var selectedSegmentIndex: Int?
     @IBOutlet var titleTextField : UITextField
     @IBOutlet var hintTextField : UITextView
     @IBOutlet var beaconFoundLabel : UILabel
     @IBOutlet var segmentedControl : UISegmentedControl
+    var descriptionPlaceholderLabel : UITextView?
     
     init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -30,21 +32,29 @@ UITextFieldDelegate, ESTBeaconManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        target = HuntTarget(
+            entity: NSEntityDescription.entityForName("HuntTarget", inManagedObjectContext: moc),
+            insertIntoManagedObjectContext: moc
+        )
+        
         beaconManager = ESTBeaconManager()
         beaconManager!.delegate = self;
         var uuid = NSUUID(UUIDString: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")
         var beaconRegion = ESTBeaconRegion(proximityUUID: uuid, identifier: "estimote")
         beaconManager!.startRangingBeaconsInRegion(beaconRegion)
         
-        target = HuntTarget(
-            entity: NSEntityDescription.entityForName("HuntTarget", inManagedObjectContext: moc),
-            insertIntoManagedObjectContext: moc
-        )
         if let h = hunt {
             var t = h.targets.mutableCopy() as NSMutableOrderedSet
             t.addObject(target)
             h.targets = t as NSOrderedSet
         }
+        descriptionPlaceholderLabel = UITextView(frame: hintTextField.frame)
+        descriptionPlaceholderLabel!.userInteractionEnabled = false
+        hintTextField.superview.addSubview(descriptionPlaceholderLabel)
+        descriptionPlaceholderLabel!.backgroundColor = UIColor.clearColor()
+        descriptionPlaceholderLabel!.textColor = UIColor.lightGrayColor()
+        descriptionPlaceholderLabel!.text = descriptionPlaceholders[0]
+        selectedSegmentIndex = 0
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -86,6 +96,7 @@ UITextFieldDelegate, ESTBeaconManagerDelegate {
             }
             selectedSegmentIndex = segmentedControl.selectedSegmentIndex
             hintTextField.text = descriptions[segmentedControl.selectedSegmentIndex]
+            updatePlaceholderLabel(hintTextField)
         }
     }
     
@@ -113,9 +124,32 @@ UITextFieldDelegate, ESTBeaconManagerDelegate {
     
     func textField(textField: UITextField!, shouldChangeCharactersInRange range: NSRange, replacementString string: String!) -> Bool {
         if string == "\n" {
-            descriptions[segmentedControl.selectedSegmentIndex] = textField.text
+            textField.resignFirstResponder()
             return false
         }
         return true
     }
+
+    func textView(textView: UITextView!, shouldChangeTextInRange range: NSRange, replacementText string: String!) -> Bool {
+        if string == "\n" {
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
+    }
+    
+    func textViewDidChange (textView: UITextView!) {
+        updatePlaceholderLabel(textView)
+    }
+    
+    func updatePlaceholderLabel(textView: UITextView!) {
+        if textView.text == "" {
+            descriptionPlaceholderLabel!.text = descriptionPlaceholders[segmentedControl.selectedSegmentIndex]
+        } else {
+            descriptionPlaceholderLabel!.text = ""
+        }
+    }
+    
+
+    
 }
