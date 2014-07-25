@@ -25,11 +25,13 @@ class CreateHuntViewController : UIViewController, MCNearbyServiceBrowserDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         broadcast()
+        let label = UILabel(frame: CGRectInset(view.frame, 18.0, 0))
+        label.numberOfLines = 5
+        label.text = "Broadcasting a scavenger hunt:\n   " + hunt!.title + "\n" + "   \(hunt!.targets.count) beacon target" + (hunt!.targets.count == 1 ? "." : "s.")
+        view.addSubview(label)
     }
     
     func broadcast() {
-        var label : UILabel?
-        label = UILabel()
         theSession = MCSession(peer: localPeerID)
         theSession!.delegate = self
         

@@ -27,6 +27,7 @@ MCNearbyServiceAdvertiserDelegate, UIActionSheetDelegate, MCSessionDelegate, CLL
     var dictionary : NSDictionary?
     var target : NSDictionary?
 
+    @IBOutlet var beaconTitleLabel: UILabel
     @IBOutlet var huntDescLabel: UILabel
     
     init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -60,10 +61,6 @@ MCNearbyServiceAdvertiserDelegate, UIActionSheetDelegate, MCSessionDelegate, CLL
         )
         actionSheet.delegate = self
         self.invitationHandler = invitationHandler
-//        actionSheet.title = "Received Invitation from \(peerID.displayName)"
-//        actionSheet.addButtonWithTitle(TITLE_ACCEPT)
-//        actionSheet.addButtonWithTitle(TITLE_REJECT)
-//        actionSheet.destructiveButtonIndex = 1;
         actionSheet.showInView(self.view)
     }
     
@@ -98,15 +95,18 @@ MCNearbyServiceAdvertiserDelegate, UIActionSheetDelegate, MCSessionDelegate, CLL
         var str = NSString(data: data, encoding: NSUTF8StringEncoding)
         println("received data: \(str)")
         dictionary = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? NSDictionary
+        
+        // For demo purposes: Just snag the *first* target, discard other targets.
+        // Ideally, you would pay attention to all the targets in the hunt here.
         var t = dictionary!["targets"] as NSArray
         target = t[0] as? NSDictionary
 
         dispatch_async(dispatch_get_main_queue(), {
             
-            //self.huntDescLabel.text = self.target!["tooFar"] as String
-            
             self.beaconManager = CLLocationManager()
             self.beaconManager!.delegate = self;
+            
+            self.beaconTitleLabel.text = self.target!["title"] as String
             
             let uuid = NSUUID(UUIDString: self.target!["proximityUUID"] as String)
             println("uuid: \(uuid)")
@@ -133,18 +133,21 @@ MCNearbyServiceAdvertiserDelegate, UIActionSheetDelegate, MCSessionDelegate, CLL
     }
     
     func locationManager(manager: CLLocationManager!, didRangeBeacons beacons: [AnyObject]!, inRegion region: CLBeaconRegion!) {
-            if beacons.count > 0 {
-                let beacon : CLBeacon = beacons[0] as CLBeacon
-                if beacon.proximity == CLProximity.Far {
-                    huntDescLabel.text = target!["far"] as String
-                } else if (beacon.proximity == CLProximity.Near) {
-                    huntDescLabel.text = target!["near"] as String
-                } else if (beacon.proximity == CLProximity.Immediate) {
-                    huntDescLabel.text = target!["immediate"] as String
-                } else {
-                    huntDescLabel.text = target!["tooFar"] as String
-                }
+        if beacons.count > 0 {
+            let beacon : CLBeacon = beacons[0] as CLBeacon
+            if beacon.proximity == CLProximity.Far {
+                huntDescLabel.text = target!["far"] as String
+            } else if (beacon.proximity == CLProximity.Near) {
+                huntDescLabel.text = target!["near"] as String
+            } else if (beacon.proximity == CLProximity.Immediate) {
+                huntDescLabel.text = target!["immediate"] as String
+            } else {
+                huntDescLabel.text = target!["tooFar"] as String
             }
+        } else {
+            // No beacons were in range - use the too far text
+            huntDescLabel.text = target!["tooFar"] as String
+        }
     }
     
 }
